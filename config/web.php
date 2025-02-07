@@ -4,12 +4,13 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'simple',
     'basePath' => dirname(__DIR__),
+    'language' => 'ru-RU',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -37,19 +38,46 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error'],
+                    'logFile' => '@runtime/logs/web-error.log'
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['warning'],
+                    'logFile' => '@runtime/logs/web-warning.log'
+                ],
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,   // не публиковать пакет
+                    'js' => [
+                        // Last working from CDN
+                        'https://code.jquery.com/jquery-3.7.1.min.js',
+                    ]
+                ],
+                'yii\widgets\PjaxAsset' => [
+                    'sourcePath' => null,   // не публиковать пакет
+                    'js' => [
+                        'https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js',
+                    ]
                 ],
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                // need for right canonical
+                '' => 'site/index',
+                // for Site controller
+                '<alias:\w+>' => 'site/<alias>',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
