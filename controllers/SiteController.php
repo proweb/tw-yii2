@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -53,6 +55,8 @@ class SiteController extends Controller
             ],
         ];
     }
+
+
 
     /**
      * Displays homepage.
@@ -99,7 +103,6 @@ class SiteController extends Controller
     }
 
 
-
     /**
      * Displays about page.
      *
@@ -108,5 +111,26 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * Displays Ajax page.
+     *
+     * @return string
+     */
+    public function actionAjax($name)
+    {
+        echo $name;
+    }
+
+    public function actionDev()
+    {
+        return " Controller: " . $this->getUniqueId() . ' Action: ' . $this->action->id;
+
+    }
+    public function actionPage($slug)
+    {
+    return 'Page controller: ' . $slug;
+
     }
 }
