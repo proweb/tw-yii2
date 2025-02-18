@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'simple',
+    'name' => 'Сайт',
     'basePath' => dirname(__DIR__),
     'language' => 'ru-RU',
     'bootstrap' => ['log'],
@@ -70,12 +71,14 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                // need for right canonical
-                '' => 'site/index',
-                // for Site controller
-                '<alias:\w+>' => 'site/<alias>',
+            'suffix' => '/',
+            'normalizer' => [
+                'class' => 'yii\web\UrlNormalizer',
+                'collapseSlashes' => true,
+                'normalizeTrailingSlash' => true,
             ],
+            'rules' => require 'routes.php',
+
         ],
 
     ],
