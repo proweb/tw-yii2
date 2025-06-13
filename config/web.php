@@ -69,16 +69,10 @@ $config = [
         'db' => $db,
 
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'suffix' => '/',
-            'normalizer' => [
-                'class' => 'yii\web\UrlNormalizer',
-                'collapseSlashes' => true,
-                'normalizeTrailingSlash' => true,
-            ],
-            'rules' => require 'routes.php',
-
+            'enablePrettyUrl' => true, // включили ЧПУ
+            'showScriptName' => false, // убрали index.php
+            'enableStrictParsing' => false, // строгое соответствие правилам
+            'rules' => require_once 'urls.php' // правила в отдельном файле
         ],
 
     ],
