@@ -9,17 +9,29 @@
 
 return [
     // index rule for Canonical tag
-    '' => 'site/index', // Site root
+
     // Play cart
     'user/<name:[\w\-]+>' => 'site/user',
+    /**
+     * Пример полного правила yii\web\UrlRule
+     * указан тип запроса - GET
+     * числовой параметр id - адреса вида /post/10
+     * внутренний роут - который ловит параметр
+     * класс UrlNormalizer с редиректом 301 на правило БЕЗ редиректа
+     */
     [
         'verb' => 'GET',
         'name' => 'myroute',
         'pattern' => 'post/<id:\d+>',
         'route' => 'site/dev',
+        'normalizer' => [
+            // use temporary redirection instead of permanent for debugging
+            'action' => yii\web\UrlNormalizer::ACTION_REDIRECT_PERMANENT,
+        ],
        // 'defaults' => ['id' => 1],
        //  'suffix' => '/'
     ],
+    '' => 'site/index', // Site root
 // Response controller
 
 
