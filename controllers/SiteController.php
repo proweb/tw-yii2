@@ -2,17 +2,21 @@
 
 namespace app\controllers;
 
+use app\components\WebController;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\Request;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UrlManager;
 
 
-class SiteController extends Controller
+class SiteController extends WebController
 {
     /**
      * {@inheritdoc}
@@ -55,7 +59,6 @@ class SiteController extends Controller
             ],
         ];
     }
-
 
 
     /**
@@ -118,19 +121,21 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAjax($name)
+    public function actionUser($name)
     {
-        echo $name;
+        return "Пользователь с именем = " . $name;
     }
 
-    public function actionDev()
+    public function actionDev($id = null)
     {
-        return " Controller: " . $this->getUniqueId() . ' Action: ' . $this->action->id;
+      //   VarDumper::dump((new yii\web\UrlManager)->parseRequest(Yii::$app->request), 10, true);
+      return "Param($id): {$id} | ControllerID: {$this->getUniqueId()} \r\n | ActionID: {$this->action->id}";
+    }
+
+    public function actionRoute()
+    {
+        return "site/about internal route converts to: " . Url::toRoute(['site/about'], true);
 
     }
-    public function actionPage($slug)
-    {
-    return 'Page controller: ' . $slug;
 
-    }
 }
