@@ -23,6 +23,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 $this->registerMetaTag(['name' => 'google-site-verification', 'content' => '']);
 $this->registerMetaTag(['name' => 'yandex-verification', 'content' => '']);
 $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+
 // CSRF
 $this->registerCsrfMetaTags();
 ?>
@@ -48,8 +49,8 @@ $this->registerCsrfMetaTags();
         'items' => [
             ['label' => 'Index', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'DevRoute', 'url' => ['/site/dev']],
-            ['label' => 'AJAX', 'url' => ['/site/ajax']],
+            ['label' => 'DevRoute', 'url' => ['/site/dev']]
+
 
 
         ]
